@@ -19,30 +19,29 @@ module.exports = function(grunt) {
       all: [
         'Gruntfile.js',
         'tasks/*.js',
-        '<%= nodeunit.tests %>',
+        '<%= nodeunit.tests %>'
       ],
       options: {
-        jshintrc: '.jshintrc',
-      },
+        jshintrc: '.jshintrc'
+      }
     },
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: ['tmp'],
+      tests: ['tmp']
     },
 
-    deployments: {
-        options: {
-            backups_dir: ''
-        },
-        local: '<%= db_fixture.local %>',
-        develop: '<%= db_fixture.develop %>'
+    db_dump: {
+	    // This one should work
+        mysql: '<%= db_fixture.mysql %>',
+	    // This one should fail 
+        info_schema: '<%= db_fixture.info_schema %>'	    
     },
 
     // Unit tests.
     nodeunit: {
-      tests: ['test/*_test.js'],
-    },
+      tests: ['test/*_test.js']
+    }
 
   });
 

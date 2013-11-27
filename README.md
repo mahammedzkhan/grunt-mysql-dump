@@ -63,14 +63,16 @@ You *must* define targets as shown above. Each target defines the connection inf
 
 ```js
 "local": {
-  "title": "Local DB",
+  "options": {
+    "title": "Local DB",
   
-  "database": "db_name",
-  "user": "db_username",
-  "pass": "db_password",
-  "host": "db_host",
+    "database": "db_name",
+    "user": "db_username",
+    "pass": "db_password",
+    "host": "db_host",
   
-  "backup_to": "/db/backups/local.sql"
+    "backup_to": "/db/backups/local.sql"
+  }
 },
 ```
 
@@ -78,16 +80,18 @@ You can also connect to a remote host using SSH by specifying a `ssh_host` optio
 
 ```js
 "production": {
-  "title": "Production DB",
+  "options": {
+    "title": "Production DB",
   
-  "database": "db_name",
-  "user": "db_username",
-  "pass": "db_password",
-  "host": "db_host",
-  
-  "ssh_host": "db_ssh_host",
-  
-  "backup_to": "/db/backups/production.sql"
+    "database": "db_name",
+    "user": "db_username",
+    "pass": "db_password",
+    "host": "db_host",
+    
+    "ssh_host": "db_ssh_host",
+    
+    "backup_to": "/db/backups/production.sql"
+  }
 }
 ```
 
@@ -109,38 +113,44 @@ grunt.initConfig({
     
     // "Local" target
     "local": {
-      "title": "Local DB",
-      
-      "database": "<%= db_config.local.db_name %>",
-      "user": "<%= db_config.local.username %>",
-      "pass": "<%= db_config.local.password %>",
-      "host": "<%= db_config.local.host %>",
-      
-      "backup_to": "/db/backups/local.sql"
+      "options": {
+          "title": "Local DB",
+        
+        "database": "<%= db_config.local.db_name %>",
+        "user": "<%= db_config.local.username %>",
+        "pass": "<%= db_config.local.password %>",
+        "host": "<%= db_config.local.host %>",
+        
+        "backup_to": "/db/backups/local.sql"
+      }
     },
     
     "stage": {
-      "title": "Production DB",
-      
-      "database": "<%= db_config.stage.db_name %>",
-      "user": "<%= db_config.stage.username %>",
-      "pass": "<%= db_config.stage.password %>",
-      "host": "<%= db_config.stage.host %>",
-      
-      "backup_to": "/db/backups/stage.sql"
+      "options": {
+        "title": "Production DB",
+        
+        "database": "<%= db_config.stage.db_name %>",
+        "user": "<%= db_config.stage.username %>",
+        "pass": "<%= db_config.stage.password %>",
+        "host": "<%= db_config.stage.host %>",
+        
+        "backup_to": "/db/backups/stage.sql"
+      }
     },
     
     "production": {
-      "title": "Production DB",
-      
-      "database": "<%= db_config.production.db_name %>",
-      "user": "<%= db_config.production.username %>",
-      "pass": "<%= db_config.production.password %>",
-      "host": "<%= db_config.production.host %>",
-      
-      "ssh_host": "<%= db_config.production.ssh_host %>",
-      
-      "backup_to": "/db/backups/production.sql"
+      "options": {
+        "title": "Production DB",
+        
+        "database": "<%= db_config.production.db_name %>",
+        "user": "<%= db_config.production.username %>",
+        "pass": "<%= db_config.production.password %>",
+        "host": "<%= db_config.production.host %>",
+        
+        "ssh_host": "<%= db_config.production.ssh_host %>",
+        
+        "backup_to": "/db/backups/production.sql"
+      }
     }
   },
 })
@@ -164,6 +174,7 @@ Description: the database user with permissions to access the database
 
 #### pass
 Type: `String`  
+Default: *(empty password)*  
 Description: the password for the database user (above)
 
 #### host
@@ -178,6 +189,11 @@ Description: the port the mysql server listens to
 #### ssh_host
 Type: `String`  
 Description: ssh connection string in the format `SSH_USER@SSH_HOST`. The task assumes you have ssh keys setup which allow you to remote into your server without requiring the input of a password. As this is an exhaustive topic we will not cover it here but you might like to start by reading [Github's own advice](https://help.github.com/articles/generating-ssh-keys).
+
+#### backup_to
+Type: `String`
+Default: `"db/backups/<%= grunt.template.today('yyyy-mm-dd') %> - <%= target %>.sql"`
+Description: full destination file path of the generated dump. This option can include templates such as `<%= grunt.template.today('yyyy-mm-dd') %>` or `<%= target %>`.
 
 ### Options
 

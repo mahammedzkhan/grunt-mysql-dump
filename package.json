@@ -2,7 +2,7 @@
   "private": true,
   "name": "grunt-mysql-dump",
   "description": "Dump MYSQL databases using Grunt",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "homepage": "https://github.com/DigitalCuisine/grunt-mysql-dump",
   "author": {
     "name": "Digital Cuisine",

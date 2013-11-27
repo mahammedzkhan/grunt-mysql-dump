@@ -208,6 +208,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 2013-11-27   v1.0.0   Releasing. Yeah.
 * 2013-11-27   v0.0.1   Plugin made private until it reaches a publishable state. Update README and package info.
 
 ### grunt-deployments history

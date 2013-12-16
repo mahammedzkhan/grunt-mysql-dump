@@ -77,7 +77,7 @@ module.exports = function(grunt) {
         var tpl_mysqldump = grunt.template.process(commandTemplates.mysqldump, {
             data: {
                 user: options.user,
-                pass: options.pass != "" ? '-p' + options.pass : '',  
+                pass: options.pass !== "" ? '--password="' + options.pass + '"' : '',
                 database: options.database,
                 host: options.host,
 	            port: options.port

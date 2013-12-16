@@ -219,6 +219,11 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ## License
 
 This plugin is a stripped down and modified version of @getdave's plugin [grunt-deployments](https://github.com/getdave/grunt-deployments)
-Until the codebase undercomes significant changes, this plugin's source code remains *Copyright (c) 2013 David Smith* under the MIT license as found in the LICENSE-MIT file.
+It is released under the same MIT license, as found in the LICENSE-MIT file.
+*Copyright (c) 2013 Digital Cuisine*
 
-Modifications on the codebase are *Copyright (c) 2013 Digital Cuisine* under the MIT license too.
+
+## Contributors
+
+* Olivier Lance (@olance/@digitalcuisine)
+* @craigloftus

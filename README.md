@@ -200,6 +200,11 @@ Description: full destination file path of the generated dump. This option can i
 *No global option as of now*
 
 
+## Note to MAMP users...
+
+If you’re using MAMP, then mysql command line tools are not made available in your PATH automatically.  
+For this plugin to work, you must find out the path to these tools (On Mac OS: bundled in MAMP.app; on Windows/Linux: probably within the app's directory tree) and add that path to your PATH environment variable!
+
 ## Contributing
 
 Contributions to this plugin are most welcome. This is very much a Alpha release and so if you find a problem please consider raising a pull request or creating a Issue which describes the problem you are having and proposes a solution.

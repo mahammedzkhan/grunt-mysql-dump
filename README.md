@@ -213,6 +213,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 2015-02-20   v1.1.0	Fixes on password argument in command line - Using -hex-blob option for mysqldump call - ability to add extra arguments to command line call
 * 2013-11-27   v1.0.0   Releasing. Yeah.
 * 2013-11-27   v0.0.1   Plugin made private until it reaches a publishable state. Update README and package info.
 
@@ -232,3 +233,4 @@ It is released under the same MIT license, as found in the LICENSE-MIT file.
 
 * Olivier Lance (@olance/@digitalcuisine)
 * @craigloftus
+* @zonito

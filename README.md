@@ -1,6 +1,6 @@
-# Grunt (MYSQL) Database Dumps
+# Grunt (MYSQL) Database Dumps and Imports
 
-> Dump local or remote MYSQL databases using Grunt.
+> Dump and import local or remote MYSQL databases using Grunt.
 
 **IMPORTANT NOTE**: the authors of this Plugin assume **no responsibility** for any actions which result from the usage of this script. Specifically, the integrity of the generated dumps cannot be guaranteed.
 Use this plugin *at your own risk*. It is *strongly* recommended that you test the script in a non-critical environment prior to rolling out for production use. Make sure it generates dumps that match your requirements before relying on it as a backup solution.
@@ -11,25 +11,37 @@ This plugin requires Grunt `~0.4.1`
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-mysql-dump --save-dev
+npm install grunt-mysql-dump-import --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-mysql-dump');
+grunt.loadNpmTasks('grunt-mysql-dump-import');
 ```
 
 ## Documentation
 
 ### Overview
-In your project's Gruntfile, add a section named `db_dump` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `db_dump` and `db_import` to the data object passed into `grunt.initConfig()`.
 
-The task expects a series of `targets`, one for each of the locations which you want to dump the database from.
+The tasks expect a series of `targets`, one for each of the locations which you want to dump the database from.
 
 ```js
 grunt.initConfig({
   db_dump: {
+    local: {
+
+    },
+    my_target_1: {
+
+    },
+    my_target_2: {
+
+    },
+    // etc
+  },
+  db_import: {
     local: {
 
     },
@@ -47,7 +59,7 @@ grunt.initConfig({
 
 ### Available Tasks
 
-The plugin makes one new task available via Grunt: `db_dump`. The interface for this command is:
+The plugin makes two new tasks available via Grunt: `db_dump` and `db_import`. The interface for these commands are:
 
 ```shell
 grunt db_dump:target_name
@@ -55,6 +67,12 @@ grunt db_dump:target_name
 
 This will dump the database according to the options found in the `target_name` target.
 You can dump databases for all targets by simply calling `grunt db_dump`.
+
+```shell
+grunt db_import:target_name
+```
+
+This will import the dumpfile according to the options found in the `target_name` target.
 
 
 ### Usage
@@ -105,6 +123,25 @@ The structure below represents a typical usage example for the task configuratio
 grunt.initConfig({
   // Load database config from external JSON (optional)
   db_config: grunt.file.readJSON('config/db.json'),
+
+  db_import: {
+    options: {
+      // common options should be defined here
+    },
+    
+    // "Local" target
+    "local": {
+      "options": {
+          "title": "Local DB",
+        
+        "database": "<%= db_config.local.db_name %>",
+        "user": "<%= db_config.local.username %>",
+        "pass": "<%= db_config.local.password %>",
+        "host": "<%= db_config.local.host %>",
+        
+        "backup_to": "/db/backups/local.sql"
+      }
+  },
 
   db_dump: {
     options: {
@@ -195,15 +232,11 @@ Type: `String`
 Default: `"db/backups/<%= grunt.template.today('yyyy-mm-dd') %> - <%= grunt.task.current.target %>.sql"`
 Description: full destination file path of the generated dump. This option can include templates such as `<%= grunt.template.today('yyyy-mm-dd') %>` or `<%= grunt.task.current.target %>`.
 
+Within the dumptask, this is the location of the file that will be imported.
+
 ### Options
 
 *No global option as of now*
-
-
-## Note to MAMP users...
-
-If you’re using MAMP, then mysql command line tools are not made available in your PATH automatically.  
-For this plugin to work, you must find out the path to these tools (On Mac OS: bundled in MAMP.app; on Windows/Linux: probably within the app's directory tree) and add that path to your PATH environment variable!
 
 ## Contributing
 
